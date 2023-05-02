@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  tasks:
+  
+  - name: Loesche das lokale Outputverzeichnis rekursiv. D.h. mit allen enthaltenen Dateien
+    ansible.builtin.file:
+      path: ~/ansible_output
+      state: absent

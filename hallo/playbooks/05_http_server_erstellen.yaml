@@ -1,0 +1,49 @@
+---
+# Hier wird Play 1 definiert
+- name: Prüfe ob der Server verfügbar ist
+  hosts: Server
+  tasks:
+  - name: Ping an den Server
+    ansible.builtin.ping:
+
+# Hier wird Play 2 definiert
+- name: Prüfe DB Verfügbarkeit
+  hosts: DB_Instanz
+  tasks:
+  - name: Ping an DB
+    ansible.builtin.ping:
+
+# Hier Play 3: Server aktualisieren
+- name: HTTP Server installieren und starten
+  hosts: Server
+  become: true
+  tasks:
+  - name: yum aktualisieren
+    ansible.builtin.yum:
+      name: '*'
+      state: latest
+      update_cache: yes
+      #cache_valid_time: 3600
+
+  - name: apache httpd-server installieren
+    ansible.builtin.yum:
+      name: httpd
+      state: latest
+
+  - name: HTTP Server starten
+    ansible.builtin.service: 
+      name: httpd
+      state: started
+      enabled: yes
+
+#Play 4: Website kopieren
+- name: Kopiere SimpleSite auf den Server
+  hosts: Server
+  become: true
+  tags:
+   - copy-site
+  tasks:
+  - name: kopieren der Seite
+    ansible.builtin.copy:
+      src: ~/ansible/hallo/src/simplesite/
+      dest: /var/www/html

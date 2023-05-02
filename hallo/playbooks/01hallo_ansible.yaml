@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+
+  tasks:
+  - name: "Hallo auf dem Localhost"
+    debug: msg="Hallo aus dem ersten Playbook"

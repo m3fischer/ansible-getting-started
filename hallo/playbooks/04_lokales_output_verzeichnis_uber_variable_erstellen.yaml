@@ -1,0 +1,30 @@
+---
+
+- hosts: localhost
+  
+  # Externe Variablen einbinden
+  vars_files: 
+  - ../vars/my-vars.yaml
+  
+  # Eine lokale variable definieren
+  vars:
+    local_file_name: my_file.txt
+
+  tasks:
+  
+  - name: "Ein neues Ansible Verzeichnis anlegen"
+    ansible.builtin.file:
+      path: '{{output_path}}'
+      state: directory
+      mode: '0755'
+
+  - name: Datei im ansible_output anlegen
+    ansible.builtin.file:
+      path: '{{output_path}}/{{local_file_name}}'
+      state: touch
+
+  - name: Eine neue Zeile in die Datei einfügen. Wenn die Datei nicht existiert wird sie erstellt.
+    ansible.builtin.lineinfile:
+      path: ~/ansible_output/my_file.txt
+      line: Diese Zeile soll ergänzt werden.
+      #create: yes

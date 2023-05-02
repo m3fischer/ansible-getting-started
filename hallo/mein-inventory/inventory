@@ -1,0 +1,4 @@
+[EC2Instanzen]
+DB_Instanz 	ansible_host=3.77.233.126
+Client_Instanz 	ansible_host=18.197.165.1
+Server  	ansible_host=3.121.212.3

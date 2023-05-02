@@ -1,0 +1,11 @@
+body {
+    background-color: #083347;
+    color: white;
+    font-size: 2em;
+    margin: 2em;
+    text-align: center;
+}
+img {
+  max-width: 30%;
+  margin: 10% 30%
+}

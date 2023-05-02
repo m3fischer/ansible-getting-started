@@ -1,0 +1,3 @@
+---
+# Diese Dateien dient dem anlegen / speichern von Variablen innerhalb des Porjekts
+output_path: ~/ansible_output

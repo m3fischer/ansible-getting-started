@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  tasks:
+  
+  - name: "Ein neues Ansible Verzeichnis anlegen"
+    ansible.builtin.file:
+      path: ~/ansible_output
+      state: directory
+      mode: '0755'
+
+  - name: Datei im ansible_output anlegen
+    ansible.builtin.file:
+      path: ~/ansible_output/my_file.txt
+      state: touch
+
+  - name: Eine neue Zeile in die Datei einfügen. Wenn die Datei nicht existiert wird sie erstellt.
+    ansible.builtin.lineinfile:
+      path: ~/ansible_output/my_file.txt
+      line: Diese Zeile soll ergänzt werden.
+      #create: yes
